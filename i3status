@@ -1,0 +1,48 @@
+general {
+        interval = 1
+	}
+
+order += "cpu_usage"
+order += "wireless _first_"
+order += "battery 0"
+order += "tztime local"
+order += "volume master"
+order += "run_watch VPN"
+
+cpu_usage {
+format = " cpu  %usage "
+}
+
+wireless _first_ {
+format_up = "%quality   %bitrate"
+format_down = " no wlan "
+}
+
+battery 0 {
+	format = " %status %percentage"
+	format_down = "No battery"
+	last_full_capacity = true
+	integer_battery_capacity = true
+	status_chr = ""
+	status_chr = "⚡"
+	status_bat = ""
+	status_full = "☻"
+    low_threshold = 15
+	threshold_type = time
+}
+tztime local {
+#        format = "%Y-%m-%d %H:%M:%S"
+format = " %R"
+}
+
+run_watch VPN {
+         pidfile = "/var/run/vpnc/pid"
+}
+
+volume master {
+    format = " %volume"
+    format_muted = " %volume"
+    device = "default"
+    mixer = "Master"
+    mixer_idx = 0
+}
