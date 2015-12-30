@@ -132,8 +132,8 @@ set $exit (l)ock, (e)xit, (s)hutdown, (r)eboot
 mode "$exit" {
 	bindsym l exec --no-startup-id i3lock, mode "default"
 	bindsym e exec --no-startup-id i3-msg exit, mode "default"
-	bindsym s exec urxvt -e shutdown -h now
-	bindsym r exec urxvt -e reboot
+	bindsym s exec lxterminal -e systemctl poweroff
+	bindsym r exec lxterminal -e systemctl reboot
 }
 
 # Windows:
@@ -216,6 +216,6 @@ exec --no-startup-id pcmanfm -d
 exec --no-startup-id feh --bg-scale /home/user/Pictures/wallpapers/iii.png
 exec --no-startup-id xset -b
 #exec --no-startup-id ScreenShooter5 --hidden
-exec --no-startup-id clipit
+exec --no-startup-id clipit -d
 exec --no-startup-id compton
 exec --no-startup-id xrandr --output LVDS1 --primary
