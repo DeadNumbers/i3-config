@@ -3,11 +3,11 @@ general {
 	}
 
 order += "cpu_usage"
-order += "wireless _first_"
+#order += "wireless _first_"
 order += "battery 0"
 order += "tztime local"
 order += "volume master"
-order += "run_watch VPN"
+#order += "run_watch VPN"
 
 cpu_usage {
 format = " cpu  %usage "
