@@ -21,7 +21,7 @@ assign [class="Subl"] $ws3
 assign [class="Deadbeef"] $ws4
 assign [class="Pidgin"] $ws5
 assign [class="Viewnior"] $ws6
-assign [class="Thunar"] $ws7
+assign [class="Pcmanfm"] $ws7
 assign [class="Vlc"] $ws8
 assign [class="Claws-mail"] $ws9
 #assign [class="Skype"] $ws10
@@ -48,11 +48,13 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+q kill
 
 #bindsym $mod+d exec dmenu_run
-bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -fn 'PT Mono-9'"
+#bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -fn 'PT Mono-9'"
+bindsym $mod+d exec "rofi -switchers combi -combi-modi window,drun,ssh -show combi -font pt\ mono\ 9"
+
 bindsym $mod+w exec firefox
 bindsym $mod+s exec subl
 bindsym --release Insert exec --no-startup-id xfce4-screenshooter 
-bindsym $mod+m exec "lxterminal -e mocp"
+#bindsym $mod+m exec "lxterminal -e mocp"
 
 
 # Window Focus
@@ -78,7 +80,7 @@ bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 #bindsym $mod+s layout stacking
-bindsym $mod+t layout tabbed
+bindsym $mod+t exec telegram
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
@@ -132,14 +134,16 @@ bindsym $mod+Control+r restart
 bindsym $mod+Control+l exec --no-startup-id i3lock -c 272d2d
 
 # exit i3 (logs you out of your X session)
-#bindsym $mod+Control+e mode "$exit"
-#set $exit (l)ock, (e)xit, (s)hutdown, (r)eboot
-#mode "$exit" {
-#	bindsym l exec --no-startup-id lock
-#	bindsym e exec --no-startup-id i3-msg exit, mode "default"
-#	bindsym s exec lxterminal -e systemctl poweroff
-#	bindsym r exec lxterminal -e systemctl reboot
-#}
+bindsym $mod+Control+e mode "$exit"
+set $exit (l)ock, (e)xit, (s)hutdown, (r)eboot
+mode "$exit" {
+	bindsym l exec --no-startup-id i3lock -c 272d2d
+	bindsym e exec --no-startup-id i3-msg exit, mode "default"
+	bindsym s exec systemctl poweroff
+	bindsym r exec systemctl reboot
+}
+#bindsym $mod+Control+e exec gksudo poweroff
+
 
 # Windows:
 new_window normal 0 px
@@ -177,14 +181,16 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
 	#output LVDS1
-        status_command i3status --config /home/user/.i3/i3status
+        status_command i3blocks -c ~/.i3/i3blocks 
+        #i3status --config /home/user/.i3/i3status
+		
 		font pango:PT Mono 9
 		position top #bottom
 		workspace_buttons yes
 		separator_symbol "●"
 		tray_padding 2
 		colors {
-			# Class			Border		Background	Text
+#			# Class			Border		Background	Text
 			focused_workspace	#$darkred	$yellow		$purple
 			active_workspace	$yellow		$blue		$purple
 			inactive_workspace	$pureblack	$darkred	$blue
@@ -199,10 +205,10 @@ bar {
 # Colors:
 # Class				Border		Background	Text		Indicator
 client.focused			$darkred	$blue		$purple		$blue
-client.unfocused		$black		$pureblack	$blue		$darkblue
-client.focused_inactive         $black		$pureblack	$blue		$darkblue
-client.urgent			$color26	$color26	$purple		$darkred
-client.background		$color26
+client.unfocused		  $black	  $pureblack   $blue		  $darkblue
+client.focused_inactive   $black	  $pureblack   $blue		  $darkblue
+client.urgent			 $color26	$color26	 $purple		$darkred
+client.background		 $color26
 
 
 # Audio Controls:
@@ -214,9 +220,9 @@ bindsym XF86AudioMute exec --no-startup-id pactl -- set-sink-volume 0 toggle
 exec --no-startup-id nm-applet
 exec --no-startup-id gxkb
 exec --no-startup-id thunar -d
-exec --no-startup-id feh --bg-scale ~/Pictures/wallpapers/smoke.jpg
+exec --no-startup-id feh --bg-scale ~/Pictures/wallpapers/glider.jpg
 exec --no-startup-id xset -b
 exec --no-startup-id clipit 
-exec --no-startup-id xcomporg
+#exec --no-startup-id xcomporg
 exec --no-startup-id gnome-keyring-daemon --start --components=pkcs11,gpg,secrets
-exec --no-startup-id shutter --min_at_startup
+#exec --no-startup-id shutter --min_at_startup
