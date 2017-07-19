@@ -15,16 +15,16 @@ set $ws9 9:
 set $ws10 10:
 
 # Assign Windows:
-assign [class="Lxterminal"] $ws1
+assign [class="Termite"] $ws1
 assign [class="Firefox"] $ws2
-assign [class="Subl"] $ws3
-assign [class="Deadbeef"] $ws4
-assign [class="Pidgin"] $ws5
+assign [class="Code"] $ws3
+#assign [class="Deadbeef"] $ws4
+#assign [class="Pidgin"] $ws5
 assign [class="Viewnior"] $ws6
-assign [class="Pcmanfm"] $ws7
-assign [class="Vlc"] $ws8
+#assign [class="Thunar"] $ws7
+#assign [class="Vlc"] $ws8
 assign [class="Claws-mail"] $ws9
-#assign [class="Skype"] $ws10
+#assign [class="Telegram"] $ws10
 
 
 # Set Colors:
@@ -42,7 +42,7 @@ set $darkblue   #0A1833
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec termite
 
 # kill focused window
 bindsym $mod+q kill
@@ -51,8 +51,8 @@ bindsym $mod+q kill
 #bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -fn 'PT Mono-9'"
 bindsym $mod+d exec "rofi -switchers combi -combi-modi window,drun,ssh -show combi -font pt\ mono\ 9"
 
-bindsym $mod+w exec firefox
-bindsym $mod+s exec subl
+bindsym $mod+w exec firefox-nightly
+bindsym $mod+s exec code
 bindsym --release Insert exec --no-startup-id xfce4-screenshooter 
 #bindsym $mod+m exec "lxterminal -e mocp"
 
@@ -147,7 +147,7 @@ mode "$exit" {
 
 # Windows:
 new_window normal 0 px
-for_window [class="^.*"] border pixel 0
+for_window [class="^.*"] floating enable border pixel 0
 #gaps inner 25
 #gaps outer 15
 
@@ -217,12 +217,16 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl -- set-sink-volume 0 -5%
 bindsym XF86AudioMute exec --no-startup-id pactl -- set-sink-volume 0 toggle
 
 # Startups:
+exec --no-startup-id xautolock -time 1 -locker '~/.i3/lock.sh'
+exec --no-startup-id numlockx on
+exec --no-startup-id pasystray
 exec --no-startup-id nm-applet
 exec --no-startup-id gxkb
 exec --no-startup-id thunar -d
-exec --no-startup-id feh --bg-scale ~/Pictures/wallpapers/glider.jpg
+exec --no-startup-id feh --bg-scale ~/Pictures/wallpapers/the-korus.jpg
+
 exec --no-startup-id xset -b
 exec --no-startup-id clipit 
-#exec --no-startup-id xcomporg
+exec --no-startup-id xcompmgr
 exec --no-startup-id gnome-keyring-daemon --start --components=pkcs11,gpg,secrets
 #exec --no-startup-id shutter --min_at_startup
