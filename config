@@ -1,7 +1,7 @@
 font pango:Ubuntu 9
 
 # Mod Set:
-set $mod Mod1
+set $mod Mod4
 
 set $ws1 1:
 set $ws2 2:
@@ -18,11 +18,11 @@ set $ws10 10:
 assign [class="Termite"] $ws1
 assign [class="Firefox"] $ws2
 assign [class="Code"] $ws3
-#assign [class="Deadbeef"] $ws4
+assign [class="Deadbeef"] $ws4
 #assign [class="Pidgin"] $ws5
 assign [class="Viewnior"] $ws6
-#assign [class="Thunar"] $ws7
-#assign [class="Vlc"] $ws8
+assign [class="Thunar"] $ws7
+assign [class="Vlc"] $ws8
 assign [class="Claws-mail"] $ws9
 #assign [class="Telegram"] $ws10
 
@@ -181,7 +181,8 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
 	#output LVDS1
-        status_command i3blocks -c ~/.i3/i3blocks 
+        status_command python ~/.i3/i3pystatus.conf
+        #status_command i3blocks -c ~/.i3/i3blocks 
         #i3status --config /home/user/.i3/i3status
 		
 		font pango:PT Mono 9
@@ -219,11 +220,11 @@ bindsym XF86AudioMute exec --no-startup-id pactl -- set-sink-volume 0 toggle
 # Startups:
 exec --no-startup-id xautolock -time 1 -locker '~/.i3/lock.sh'
 exec --no-startup-id numlockx on
-exec --no-startup-id pasystray
+#exec --no-startup-id pasystray
 exec --no-startup-id nm-applet
 exec --no-startup-id gxkb
 exec --no-startup-id thunar -d
-exec --no-startup-id feh --bg-scale ~/Pictures/wallpapers/the-korus.jpg
+exec --no-startup-id feh --bg-scale ~/.config/awesome/wall.png
 
 exec --no-startup-id xset -b
 exec --no-startup-id clipit 
