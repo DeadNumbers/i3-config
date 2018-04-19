@@ -1,108 +1,49 @@
 font pango:Ubuntu 9
 
-# Mod Set:
 set $mod Mod4
 
 set $ws1 1:
 set $ws2 2:
 set $ws3 3:
-set $ws4 4:
-set $ws5 5:
-set $ws6 6:
-set $ws7 7:
-set $ws8 8:
-set $ws9 9:
-set $ws10 10:
+set $ws4 4:4
+set $ws5 5:5
+set $ws6 6:6
+set $ws7 7:7
+set $ws8 8:8
+set $ws9 9:9
+set $ws10 10:10
 
-# Assign Windows:
-assign [class="Termite"] $ws1
+assign [class="Terminator"] $ws1
 assign [class="Firefox"] $ws2
 assign [class="Code"] $ws3
-assign [class="Deadbeef"] $ws4
-#assign [class="Pidgin"] $ws5
-assign [class="Viewnior"] $ws6
-assign [class="Thunar"] $ws7
-assign [class="Vlc"] $ws8
-assign [class="Claws-mail"] $ws9
-#assign [class="Telegram"] $ws10
 
-
-# Set Colors:
-set $color26    #262626
-set $black      #212121
-set $pureblack  #000000
-set $yellow     #ECCA54
-set $blue       #5FB9ED
-set $purple     #775FED
-set $darkred    #3A3A3A
-set $darkgreen  #0A332D
-set $darkblue   #0A1833
-
-# use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
+focus_follows_mouse no
 
-# start a terminal
-bindsym $mod+Return exec termite
-
-# kill focused window
+bindsym $mod+Return exec terminator --geometry=1000x500
 bindsym $mod+q kill
+bindsym $mod+d exec ~/.i3/switcher.sh
+bindsym $mod+w exec firefox
+bindsym --release Pause exec --no-startup-id xfce4-screenshooter 
 
-#bindsym $mod+d exec dmenu_run
-#bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -fn 'PT Mono-9'"
-bindsym $mod+d exec "rofi -switchers combi -combi-modi window,drun,ssh -show combi -font pt\ mono\ 9"
+bindsym $mod+Tab focus right
 
-bindsym $mod+w exec firefox-nightly
-bindsym $mod+s exec code
-bindsym --release Insert exec --no-startup-id xfce4-screenshooter 
-#bindsym $mod+m exec "lxterminal -e mocp"
-
-
-# Window Focus
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
-
-# Move Window
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# split in horizontal orientation
 bindsym $mod+h split h
 
-# split in vertical orientation
 bindsym $mod+v split v
-
-# enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
-
-# change container layout (stacked, tabbed, toggle split)
-#bindsym $mod+s layout stacking
-bindsym $mod+t exec telegram
 bindsym $mod+e layout toggle split
-
-# toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
-
-# change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
-
-# focus the parent container
 bindsym $mod+a focus parent
-
-# focus the child container
-#bindsym $mod+d focus child
-
-# move the currently focused window to the scratchpad
 bindsym $mod+Shift+minus move scratchpad
-
-# Show the next scratchpad window or hide the focused scratchpad window.
-# If there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+minus scratchpad show
 
-# switch to workspace
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
@@ -114,7 +55,6 @@ bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
 
-# move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2
 bindsym $mod+Shift+3 move container to workspace $ws3
@@ -126,14 +66,10 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
-# reload the configuration file
 bindsym $mod+Control+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Control+r restart
-
 bindsym $mod+Control+l exec --no-startup-id i3lock -c 272d2d
 
-# exit i3 (logs you out of your X session)
 bindsym $mod+Control+e mode "$exit"
 set $exit (l)ock, (e)xit, (s)hutdown, (r)eboot
 mode "$exit" {
@@ -142,92 +78,39 @@ mode "$exit" {
 	bindsym s exec systemctl poweroff
 	bindsym r exec systemctl reboot
 }
-#bindsym $mod+Control+e exec gksudo poweroff
 
-
-# Windows:
 new_window normal 0 px
 for_window [class="^.*"] floating enable border pixel 0
 #gaps inner 25
 #gaps outer 15
 
-# resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
         bindsym $left       resize shrink width 10 px or 10 ppt
         bindsym $down       resize grow height 10 px or 10 ppt
         bindsym $up         resize shrink height 10 px or 10 ppt
         bindsym $right      resize grow width 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
         bindsym Left        resize shrink width 10 px or 10 ppt
         bindsym Down        resize grow height 10 px or 10 ppt
         bindsym Up          resize shrink height 10 px or 10 ppt
         bindsym Right       resize grow width 10 px or 10 ppt
 
-        # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-	#output LVDS1
-        status_command python ~/.i3/i3pystatus.conf
-        #status_command i3blocks -c ~/.i3/i3blocks 
-        #i3status --config /home/user/.i3/i3status
-		
-		font pango:PT Mono 9
-		position top #bottom
-		workspace_buttons yes
-		separator_symbol "●"
-		tray_padding 2
-		colors {
-#			# Class			Border		Background	Text
-			focused_workspace	#$darkred	$yellow		$purple
-			active_workspace	$yellow		$blue		$purple
-			inactive_workspace	$pureblack	$darkred	$blue
-			urgent_workspace	$color26	$blue		$purple
-			
-			#statusline		$blue
-			background		$darkred
-			separator		$yellow
-	}
-}
-
-# Colors:
-# Class				Border		Background	Text		Indicator
-client.focused			$darkred	$blue		$purple		$blue
-client.unfocused		  $black	  $pureblack   $blue		  $darkblue
-client.focused_inactive   $black	  $pureblack   $blue		  $darkblue
-client.urgent			 $color26	$color26	 $purple		$darkred
-client.background		 $color26
-
-
-# Audio Controls:
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl -- set-sink-volume 0 -5%
+bindsym Mod1+Up exec --no-startup-id pactl set-sink-volume 0 +5%
+bindsym Mod1+Down exec --no-startup-id pactl set-sink-volume 0 -5%
 bindsym XF86AudioMute exec --no-startup-id pactl -- set-sink-volume 0 toggle
 
-# Startups:
-exec --no-startup-id xautolock -time 1 -locker '~/.i3/lock.sh'
-exec --no-startup-id numlockx on
-#exec --no-startup-id pasystray
+exec --no-startup-id xautolock -time 10 -locker '~/.i3/lock.sh'
 exec --no-startup-id nm-applet
 exec --no-startup-id gxkb
 exec --no-startup-id thunar -d
-exec --no-startup-id feh --bg-scale ~/.config/awesome/wall.png
-
+exec --no-startup-id feh --bg-scale ~/.i3/wall.png
 exec --no-startup-id xset -b
-exec --no-startup-id clipit 
+exec --no-startup-id clipit &
 exec --no-startup-id xcompmgr
 exec --no-startup-id gnome-keyring-daemon --start --components=pkcs11,gpg,secrets
-#exec --no-startup-id shutter --min_at_startup
+exec_always --no-startup-id ~/.i3/polybar.sh &
