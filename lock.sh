@@ -7,7 +7,7 @@ T='#ee00eeee'  # text
 W='#880000bb'  # wrong
 V='#bb00bbbb'  # verifying
 
-i3lock              \
+i3lock \
 --insidevercolor=$C   \
 --ringvercolor=$V     \
 \
@@ -19,18 +19,21 @@ i3lock              \
 --linecolor=$B        \
 --separatorcolor=$D   \
 \
---textcolor=$T        \
+--verifcolor=$T        \
+--wrongcolor=$T        \
 --timecolor=$T        \
 --datecolor=$T        \
+--layoutcolor=$T      \
 --keyhlcolor=$W       \
 --bshlcolor=$W        \
 \
---screen 0            \
+--screen 1            \
 --blur 5              \
 --clock               \
 --indicator           \
 --timestr="%H:%M:%S"  \
 --datestr="%A, %m %Y" \
+--keylayout 2         \
 
 # --veriftext="Drinking verification can..."
 # --wrongtext="Nope!"

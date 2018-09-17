@@ -13,18 +13,19 @@ set $ws8 8:8
 set $ws9 9:9
 set $ws10 10:10
 
-assign [class="Terminator"] $ws1
-assign [class="Firefox"] $ws2
+#assign [class="Terminal"] $ws1
+assign [class="^Firefox*"] $ws2
 assign [class="Code"] $ws3
 
 floating_modifier $mod
 focus_follows_mouse no
 
-bindsym $mod+Return exec terminator --geometry=1000x500
+#bindsym $mod+Return exec terminator --geometry=1000x500
+bindsym $mod+Return exec xfce4-terminal
 bindsym $mod+q kill
 bindsym $mod+d exec ~/.i3/switcher.sh
 bindsym $mod+w exec firefox
-bindsym --release Pause exec --no-startup-id xfce4-screenshooter 
+bindsym --release Pause exec --no-startup-id flameshot # xfce4-screenshooter 
 
 bindsym $mod+Tab focus right
 
@@ -107,10 +108,9 @@ bindsym XF86AudioMute exec --no-startup-id pactl -- set-sink-volume 0 toggle
 exec --no-startup-id xautolock -time 10 -locker '~/.i3/lock.sh'
 exec --no-startup-id nm-applet
 exec --no-startup-id gxkb
-exec --no-startup-id thunar -d
+#exec --no-startup-id thunar -d
 exec --no-startup-id feh --bg-scale ~/.i3/wall.png
 exec --no-startup-id xset -b
 exec --no-startup-id clipit &
 exec --no-startup-id xcompmgr
-exec --no-startup-id gnome-keyring-daemon --start --components=pkcs11,gpg,secrets
 exec_always --no-startup-id ~/.i3/polybar.sh &
