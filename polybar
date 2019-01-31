@@ -1,185 +1,149 @@
-;             _       _                                   __ _       
-; _ __   ___ | |_   _| |__   __ _ _ __    ___ ___  _ __  / _(_) __ _ 
-;| '_ \ / _ \| | | | | '_ \ / _` | '__|  / __/ _ \| '_ \| |_| |/ _` |
-;| |_) | (_) | | |_| | |_) | (_| | |    | (_| (_) | | | |  _| | (_| |
-;| .__/ \___/|_|\__, |_.__/ \__,_|_|     \___\___/|_| |_|_| |_|\__, |
-;|_|            |___/                                          |___/ 
-
-
-
-
-;*********************************************************
+;=====================================================
 ;
-;                          COLORS
+;   To learn more about how to configure Polybar
+;   go to https://github.com/jaagr/polybar
 ;
-;**********************************************************
+;   The README contains alot of information
+;
+;=====================================================
+
 [colors]
-bg = ${xrdb:color7:#222}
-;fg = ${xrdb:color0:#222}
-fg-alt = ${xrdb:color7:#222}
-;primary = ${xrdb:color5:#222}
-;secondary = ${xrdb:color2:#222}
-alert = ${xrdb:color8:#222}
-;**********************************************************
-;
-;                       GLOBAL WM SETTINGS
-;
-;**********************************************************
-[global/wm]
-margin-top = 0
-margin-bottom = 0
-;*********************************************************
-;
-;                       BAR SETTINGS
-;
-;********************************************************
+; Color Theme ==============================
+; Can copy directly from Xresources #defines
+base00 = #0c1014
+base01 = #11151c
+base02 = #103752
+base03 = #0b3e53
+base04 = #245361
+base05 = #599cab
+base06 = #99d1ce
+base07 = #d3ebe9
+base08 = #c23127
+base09 = #d26937
+base0A = #edb443
+base0B = #888ca6
+base0C = #4e5166
+base0D = #195466
+base0E = #33859e
+base0F = #2aa889
+; =========================================
+
 [bar/default]
-;------------;
-; DIMENSIONS ;
-;------------;
-
 width = 100%
-height = 20
-offset-y = 0
-offset-x = 0
-
-border-top-size = 0
-border-bottom-size = 0
-border-right-size = 0
-border-left-size = 0
-
-;----------;
-; LOCATION ;
-;----------;
-
-bottom = false
-wm-restack = i3
-override-redirect = false
-
-;-------;
-; FONTS ;
-;-------;
-
-font-0 = Inconsolata for Powerline:size=9;3
-font-1 = "Font Awesome 5 Free:style=Solid:pixelsize=8;3"
-font-2 = "Font Awesome 5 Free:style=Regular:pixelsize=8;3"
-font-3 = "Font Awesome 5 Brands:pixelsize=8;3"
-
-
-;---------------;
-; MISCELLANEOUS ;
-;---------------;
-
-separator = |
+height = 22
+radius = 0
+padding = 1
 fixed-center = true
-padding-left = 0
-padding-right = 1
-module-margin = 1
-line-size = 1
+bottom = true
+
+background = ${colors.base00}
+foreground = ${colors.base05}
+
+module-margin-left = 1
+module-margin-right = 1
+
+font-0 = Liberation:style=Mono:size=10;3
+font-1 = Font Awesome 5 Free:style=Regular:size=10;3
+font-2 = Font Awesome 5 Brands:style=Regular:size=10;3
+font-3 = FontAwesome:style=Regular:size=10;3
+
 modules-left = i3
 modules-center = xwindow 
-modules-right = cpu memory network backlight alsa time powermenu
-tray-position = left
+modules-right = cpu memory network alsa time
+tray-position = right
 tray-detached = false
-tray-maxsize = 16
-tray-transparent = false
-tray-background = ${root.background}
+tray-maxsize = 20
 tray-offset-x = 0
 tray-offset-y = 0
 tray-padding = 0
 tray-scale = 1.0
 cursor-click = pointer
 
-
-;--------;
-; COLORS ;
-;--------;
-
-background = #212121
-foreground = #CECECE 
-;**********************************************************
-;
-;                   MODULES SETTINGS
-;
-;**********************************************************
-
-
-
-[module/i3]
-type = internal/i3
-index-sort = true
-strip-wsnumbers = true
-
-format = <label-state> <label-mode>
-
-label-mode = %mode%
-label-mode-padding = 1
-
-label-focused = %index%
-label-focused-foreground = ${xrdb:color7}
-label-focused-underline = #ffffff
-;label-focused-background = ${xrdb:color6}
-label-focused-padding = 2
-
-label-unfocused = %index%
-label-unfocused-padding = 2
-
-label-urgent = %index%
-label-urgent-background = ${xrdb:color6}
-label-urgent-padding = 2
-
-label-visible = %index%
-label-visible-padding = 2
-
-
-
-[module/time]
-type = internal/date
-interval = 1.0
-date =  %H:%M
-
-
-
-[module/date]
-type = internal/date
-date =  %e %B
-label = %date%
-
-
+[module/ewmh]
+type = internal/xworkspaces
+pin-workspaces = true
+enable-click = false
+enable-scroll = false
+icon-0 = code;♚
+icon-1 = office;♛
+icon-2 = graphics;♜
+icon-3 = mail;♝
+icon-4 = web;♞
+icon-default = ♟
+format = <label-state>
+label-monitor = %name%
+label-active = %icon% %name%
+label-active-foreground = #ffffff
+label-active-background = #3f3f3f
+label-active-underline = #fba922
+label-occupied = %icon%
+label-occupied-underline = #555555
+label-urgent = %icon%
+label-urgent-foreground = #000000
+label-urgent-background = #bd2c40
+label-urgent-underline = #9b0a20
+label-empty = %icon%
+label-empty-foreground = #55
 
 [module/xwindow]
 type = internal/xwindow
-;label = %title%
-label = %title:0:30:...%
+label = %title:0:128:...%
 
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+strip-wsnumbers = true
+pin-workspaces = true
+wrapping-scroll = false
+label-mode = %mode%
+label-mode-padding = 2
+label-mode-background = #e60053
 
+label-focused = %name%
+label-focused-foreground = #ffffff
+label-focused-background = #3f3f3f
+label-focused-underline = #fba922
+label-focused-padding = 4
 
-[module/battery]
-type = internal/battery
-battery = BAT1
-adapter = ACAD
-full-at = 100
-label-discharging = %percentage%%
-label-charging = %percentage%%
-label-full = %percentage%%
-format-discharging = <ramp-capacity> <label-discharging>
-format-full = <ramp-capacity> <label-full>
-format-charging =  <label-charging>
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-3 = 
-ramp-capacity-4 = 
- 
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-3 = 
-animation-charging-4 = 
-animation-charging-foreground = #228B22
-animation-charging-framerate = 750
+label-unfocused = %name%
+label-unfocused-padding = 4
 
+label-visible = %name%
+label-visible-underline = #555555
+label-visible-padding = 4
 
+[module/cpu]
+type = internal/cpu
+interval = 1
+format = "%{F#edb443}%{F-} <label>"
+format-foreground = ${colors.base05}
+label = %percentage%%
+
+[module/memory]
+type = internal/memory
+interval = 1
+format = "%{F#195466}%{F-} <label>"
+format-foreground = ${colors.base05}
+label = %mb_used%
+
+[module/time]
+type = internal/date
+interval = 1
+time = %H:%M:%S
+label = %time%
+format = "%{F#888ca6}%{F-} <label>"
+format-foreground = ${colors.base05}
+click-left = gsimplecal
+
+[module/network]
+type = internal/network
+interface = wlp16s0
+interval = 1
+ping-interval = 3
+format-connected = %{F#2aa889}%{F-} <label-connected>
+label-connected = %downspeed% :: %upspeed%
+format-disconnected = %{F#d26937}%{F-} <label-disconnected>
+label-disconnected = "Not Connected"
 
 [module/alsa]
 type = internal/alsa
@@ -191,77 +155,11 @@ ramp-volume-0 = 
 ramp-volume-1 = 
 ramp-volume-2 = 
 
+[settings]
+screenchange-reload = true
 
+[global/wm]
+margin-top = 0
+margin-bottom = 0
 
-[module/wlan]
-type = internal/network
-interface = wlp16s0
-interval = 5
-
-label-connected =  %essid%
-label-disconnected =  Not Connected
-
-
-
-[module/backlight]
-type = internal/backlight
-card = intel_backlight
-format = <ramp> <label>
-label = %percentage%%
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-
-
-
-[module/cpu]
-type = internal/cpu
-label =  %percentage%%
-
-
-
-[module/memory]
-type = internal/memory
-label =  %gb_used%
-
-
-
-[module/network]
-type = internal/network
-interface = wlp16s0
-label-connected =  %downspeed% |  %upspeed%
-
-
-[module/powermenu]
-type = custom/menu
-expand-right = true
-label-open = 
-label-close = 
-label-separator = /
-label-separator-margin = 1
-menu-0-0 = Terminate WM
-menu-0-0-foreground = ${colors.fg-alt}
-menu-0-0-exec = i3-msg exit
-menu-0-1 = 
-menu-0-1-foreground = ${colors.fg-alt}
-menu-0-1-exec = menu-open-1
-menu-0-2 = 
-menu-0-2-foreground = ${colors.fg-alt}
-menu-0-2-exec = menu-open-2
-menu-0-3 = 
-menu-0-3-foreground = ${colors.fg-alt}
-menu-0-3-exec = lockscreen
- 
-menu-1-0 = 
-menu-1-0-foreground = ${colors.fg-alt}
-menu-1-0-exec = shutdown -r now
-menu-1-1 = 
-menu-1-1-foreground = ${colors.fg-alt}
-menu-1-1-exec = menu-open-0
- 
-menu-2-0 = 
-menu-2-0-foreground = ${colors.fg-alt}
-menu-2-0-exec = shutdown now
-menu-2-1 = 
-menu-2-1-foreground = ${colors.fg-alt}
-menu-2-1-exec = menu-open-0
+; vim:ft=dosini
